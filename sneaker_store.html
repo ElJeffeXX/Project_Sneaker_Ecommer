@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sneaker Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1f2937;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        #cart-info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        #product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 30px;
+        }
+        .product-card {
+            width: 220px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 16px;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .product-card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .product-card p {
+            margin: 8px 0;
+            color: #444;
+        }
+        .product-card button {
+            margin-top: 10px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #fff;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .product-card button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Sneaker Store</h1>
+        <p id="cart-info">Cart Items: 0</p>
+    </header>
+    <div id="product-container"></div>
+    <script>
+        // Part 3 — Define the Product Data
+        const products = [
+      {
+        id: 1,
+        name: "Classic White Sneakers",
+        price: 59,
+        category: "Casual",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 2,
+        name: "Running Pro Shoes",
+        price: 89,
+        category: "Sports",
+        image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 3,
+        name: "Black Street Sneakers",
+        price: 74,
+        category: "Streetwear",
+        image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=500&q=80"
+      }
+    ];
+
+
+        // Part 4 — Set Up State and References
+        let cartCount = 0;
+        const productContainer = document.getElementById('product-container');
+        const cartInfo = document.getElementById('cart-info');
+
+        // Part 5 — Write the Cart Update Function
+        function updateCart() {
+            cartInfo.textContent = "Cart Items: " + cartCount;
+        }
+
+        // Part 6 — Write the Add to Cart Function
+        function addToCart() {
+            cartCount += 1;
+            updateCart();
+        }
+
+        // Part 7 — Write the Display Products Function
+        function displayProducts() {
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                const image = document.createElement('img');
+                image.src = product.image;
+                image.alt = product.name;
+
+                const title = document.createElement('h2');
+                title.textContent = product.name;
+
+                const price = document.createElement('p');
+                price.textContent = "Price: $" + product.price;
+
+                const category = document.createElement('p');
+                category.textContent = "Category: " + product.category;
+
+                const button = document.createElement('button');
+                button.textContent = "Add to Cart";
+                button.onclick = addToCart;
+
+                card.appendChild(image);
+                card.appendChild(title);
+                card.appendChild(price);
+                card.appendChild(category);
+                card.appendChild(button);
+
+                productContainer.appendChild(card);
+            }
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>
